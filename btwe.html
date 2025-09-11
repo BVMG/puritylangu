@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Visionary Stories</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    :root {
+      --deep-indigo-blue: #2C3E50;
+      --royal-purple: #8E44AD;
+      --pristine-white: #FFFFFF;
+      --light-gray: #F3F3F3;
+      --section-alt: #F9F6FF;
+      --text-dark: #333;
+      --transition-time: 0.3s;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      background: var(--light-gray);
+      color: var(--text-dark);
+      line-height: 1.6;
+    }
+
+    /* PAGE HEADER */
+    .page-header {
+      position: sticky;
+      top: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: linear-gradient(90deg, var(--deep-indigo-blue) 0%, var(--royal-purple) 100%);
+      color: var(--pristine-white);
+      padding: 20px 40px;
+      z-index: 1000;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    .page-header h1 {
+      font-size: 2.2em;
+      margin: 0;
+      font-weight: 700;
+    }
+
+    /* NAVIGATION MENU */
+    .nav-menu {
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-menu .hamburger {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--pristine-white);
+      font-size: 1.8em;
+      cursor: pointer;
+      transition: color var(--transition-time);
+    }
+
+    .nav-menu .hamburger:hover {
+      color: var(--light-gray);
+    }
+
+    .nav-menu ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      gap: 20px;
+    }
+
+    .nav-menu a {
+      color: var(--pristine-white);
+      text-decoration: none;
+      font-weight: 600;
+      transition: color var(--transition-time);
+    }
+
+    .nav-menu a:hover {
+      color: var(--light-gray);
+    }
+
+    /* STORIES SECTION */
+    .stories-section {
+      padding: 40px 0 0;
+    }
+
+    /* STORY CARD */
+    .story-card {
+      padding: 60px 10%;
+      background: var(--pristine-white);
+      transition: background var(--transition-time);
+    }
+
+    .story-card:nth-child(even) {
+      background: var(--section-alt);
+    }
+
+    .story-inner {
+      max-width: 1100px;
+      margin: auto;
+      background: var(--pristine-white);
+      border-radius: 15px;
+      padding: 2em;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+      transition: box-shadow var(--transition-time);
+    }
+
+    .story-inner:hover {
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+
+    /* Slider */
+    .story-slider {
+      position: relative;
+      width: 100%;
+      height: 350px;
+      overflow: hidden;
+      border-radius: 12px;
+      margin-bottom: 1.5em;
+    }
+
+    .story-slider .slides {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .story-slider img {
+      width: 100%;
+      height: 350px;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+
+    /* Content */
+    .story-inner h3 {
+      margin: 0.6em 0;
+      font-size: 1.8em;
+      color: var(--royal-purple);
+      text-align: center;
+    }
+
+    .story-inner p {
+      font-size: 1.05em;
+      margin-bottom: 1.2em;
+      text-align: justify;
+    }
+
+    .social-links {
+      text-align: center;
+    }
+
+    .social-links a {
+      margin: 0 12px;
+      color: var(--deep-indigo-blue);
+      font-size: 1.6em;
+      transition: color var(--transition-time), transform var(--transition-time);
+    }
+
+    .social-links a:hover {
+      color: var(--royal-purple);
+      transform: scale(1.1);
+    }
+
+    /* RETURN TO TOP BUTTON */
+    .return-to-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: var(--royal-purple);
+      color: var(--pristine-white);
+      padding: 12px 18px;
+      border-radius: 50%;
+      font-size: 1.6em;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      transition: transform var(--transition-time);
+      display: none;
+    }
+
+    .return-to-top:active, .return-to-top:focus {
+      box-shadow: none;
+      background: var(--royal-purple);
+    }
+
+    .return-to-top:hover {
+      transform: translateY(-3px);
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--deep-indigo-blue);
+      color: var(--pristine-white);
+      text-align: center;
+      padding: 30px;
+      margin-top: 40px;
+    }
+
+    footer p {
+      margin: 0 0 10px;
+    }
+
+    footer a {
+      color: var(--royal-purple);
+      text-decoration: none;
+      font-weight: 600;
+      transition: text-decoration var(--transition-time);
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .page-header {
+        padding: 15px 20px;
+        align-items: center;
+      }
+
+      .page-header h1 {
+        font-size: 1.8em;
+      }
+
+      .nav-menu {
+        align-items: center;
+      }
+
+      .nav-menu .hamburger {
+        display: block;
+        margin-left: 20px;
+      }
+
+      .nav-menu .hamburger .fa-bars {
+        display: inline;
+      }
+
+      .nav-menu .hamburger .fa-times {
+        display: none;
+      }
+
+      .nav-menu .hamburger.active .fa-bars {
+        display: none;
+      }
+
+      .nav-menu .hamburger.active .fa-times {
+        display: inline;
+      }
+
+      .nav-menu ul {
+        display: none;
+        flex-direction: column;
+        width: 200px;
+        background: linear-gradient(90deg, var(--deep-indigo-blue) 0%, var(--royal-purple) 100%);
+        position: absolute;
+        top: 100%;
+        right: 0;
+        padding: 15px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        border-radius: 0 0 0 8px;
+      }
+
+      .nav-menu ul.active {
+        display: flex;
+      }
+
+      .nav-menu li {
+        margin: 8px 0;
+      }
+
+      .nav-menu a {
+        font-size: 0.9em;
+      }
+
+      .story-card {
+        padding: 40px 5%;
+      }
+
+      .story-inner {
+        padding: 1.5em;
+      }
+
+      .story-slider, .story-slider img {
+        height: 250px;
+      }
+
+      .story-inner h3 {
+        font-size: 1.5em;
+      }
+
+      .return-to-top {
+        bottom: 20px;
+        right: 20px;
+        padding: 10px 15px;
+        font-size: 1.4em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- PAGE HEADER -->
+  <header class="page-header">
+    <h1>Visionary Stories</h1>
+    <nav class="nav-menu">
+      <button class="hamburger" aria-label="Toggle Menu">
+        <i class="fas fa-bars"></i>
+        <i class="fas fa-times"></i>
+      </button>
+      <ul>
+        <li><a href="#kidlarry">Hillary</a></li>
+        <li><a href="#melvin">Melvin</a></li>
+        <li><a href="#brian">Melvin</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- MENTORSHIP STORIES -->
+  <section id="stories" class="stories-section">
+    <!-- Story 1 -->
+    <div id="kidlarry" class="story-card">
+      <div class="story-inner">
+        <div class="story-slider">
+          <div class="slides">
+            <img src="images/lary1.jpg" alt="Kidlarry">
+            <img src="images/lary2.jpg" alt="Kidlarry Performance">
+            <img src="images/lary3.jpg" alt="Kidlarry Performance">
+            <img src="images/lary4.jpg" alt="Kidlarry Performance">
+          </div>
+        </div>
+        <h3>Hillary “Kidlarry”</h3>
+        <p>Hillary Simiyu, better known as Kidlary, is absolutely killing it in the gospel hip hop game!  This dude’s a triple threat—rapping, singing, and songwriting with a style that’s all his own. He’s out here weaving different genres together, dropping hard-hitting bars, soulful hooks, and lyrics that tell real, raw stories straight from the heart.  Everything he creates is anchored in faith, packed with messages of hope, grit, and purpose that lift you up and keep you grounded. Kidlary’s not just sticking to one sound—he’s pushing boundaries, mixing it up, and still keeping it true to his gospel roots. Every verse and melody feels like a call to action, a ministry in motion, reaching people from all corners with passion and authenticity.</p>
+        <div class="social-links">
+          <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Story 2 -->
+    <div id="melvin" class="story-card">
+      <div class="story-inner">
+        <div class="story-slider">
+          <div class="slides">
+            <img src="images/mavo1.jpeg" alt="Melvin">
+            <img src="images/mev2.jpeg" alt="Melvin Singing">
+            <img src="images/mev3.jpeg" alt="Melvin Singing">
+          </div>
+        </div>
+        <h3>Mavoo</h3>
+        <p> Mavoo is a passionate gospel artist known for his unique ministry on the streets of Nairobi and in public transport, where he shares the message of hope through a simple Bluetooth speaker. His music is more than entertainment—it is a lifeline of encouragement and faith for many who listen.
+
+Beyond his artistry, Mavoo has devoted himself to mentoring and counseling street boys, walking with them through their struggles and guiding them toward a brighter future. Through faith, encouragement, and genuine care, he has transformed lives, turning pain into purpose and hopelessness into hope.</p>
+        <div class="social-links">
+          <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Story 3 -->
+    <div id="Brian" class="story-card">
+      <div class="story-inner">
+        <div class="story-slider">
+          <div class="slides">
+            <img src="images/brayo2.jpeg" alt="Melvin">
+            <img src="images/brayo1.jpeg" alt="Melvin Singing">
+            <img src="images/brayo3.jpeg" alt="Melvin Singing">
+          </div>
+        </div>
+        <h3>Kipngetich Brian</h3>
+        <p>Kipngetich Brayoo is a gospel artist passionate about spreading the message of hope and faith through music. His ministry is more than melodies—it is a calling to uplift hearts and inspire lives with the truth of God’s word.
+
+Beyond his music, Brayoo serves as a host, creating a platform where pastors and fellow artists can share their journeys, testimonies, and inspirations. Through these meaningful conversations, he reaches wider audiences, giving voice to stories that encourage faith, resilience, and purpose.</p>
+        <div class="social-links">
+          <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+    </div>
+
+    
+
+  <!-- RETURN TO TOP BUTTON -->
+  <button class="return-to-top" onclick="scrollToTop()" title="Return to Top" aria-label="Return to Top">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; 2025 Purity Langu | All Rights Reserved.</p>
+    <a href="index.html">Return Home</a>
+  </footer>
+           
+  <!-- SCRIPTS -->
+  <script>
+    // Hamburger menu toggle
+    const hamburger = document.querySelector('.hamburger');
+    const menuUl = document.querySelector('.nav-menu ul');
+
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      menuUl.classList.toggle('active');
+    });
+
+    // Close menu when clicking a link on mobile
+    document.querySelectorAll('.nav-menu a').forEach(link => {
+      link.addEventListener('click', () => {
+        if (window.innerWidth <= 768) {
+          hamburger.classList.remove('active');
+          menuUl.classList.remove('active');
+        }
+      });
+    });
+
+    // Smooth scroll for navigation links
+    document.querySelectorAll('.nav-menu a').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href').substring(1);
+        const targetElement = document.getElementById(targetId);
+        const headerHeight = document.querySelector('.page-header').offsetHeight;
+        window.scrollTo({
+          top: targetElement.offsetTop - headerHeight,
+          behavior: 'smooth'
+        });
+      });
+    });
+
+    // Image sliders with staggered start times but same speed
+    const sliders = document.querySelectorAll('.story-slider .slides');
+    sliders.forEach((slider, index) => {
+      let offset = 0;
+      const images = slider.querySelectorAll('img').length;
+      const slideInterval = 4000; // 3s pause + 1s transition implied in CSS
+
+      setTimeout(() => {
+        setInterval(() => {
+          offset = (offset + 1) % images;
+          slider.style.transform = `translateX(-${offset * 100}%)`;
+        }, slideInterval);
+      }, index * 1000); // Stagger by 1 second each
+    });
+
+    // Return to top button visibility
+    const returnToTopBtn = document.querySelector('.return-to-top');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) {
+        returnToTopBtn.style.display = 'block';
+      } else {
+        returnToTopBtn.style.display = 'none';
+      }
+    });
+
+    // Smooth scroll to top
+    function scrollToTop() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }
+  </script>
+</body>
+</html>
